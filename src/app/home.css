@@ -1,0 +1,8 @@
+.homeContainer{
+     display: flex;
+     max-width: calc(100vw - ((100vw - 1180px) / 2));
+     margin-left: auto;
+     min-height: 656px;
+
+}
+
