@@ -2,6 +2,7 @@ import { stripe } from "@/lib/stripe";
 import "./styles.css";
 import Stripe from "stripe";
 import Image from "next/image";
+import Button from "@/components/Button";
 interface ProductProps {
   params: {
     Id: string;
@@ -9,6 +10,9 @@ interface ProductProps {
 }
 
 export default async function Product({ params }: ProductProps) {
+  function handleBuy() {
+    console.log("buy");
+  }
   const { Id } = params;
   const response = await stripe.products.retrieve(Id, {
     expand: ["default_price"],
@@ -23,6 +27,7 @@ export default async function Product({ params }: ProductProps) {
       style: "currency",
       currency: "BRL",
     }).format(price.unit_amount ? price.unit_amount / 100 : 0),
+    defaultPriceId: price.id,
   };
 
   return (
@@ -39,7 +44,7 @@ export default async function Product({ params }: ProductProps) {
         <h1>{product.name}</h1>
         <span>{product.price}</span>
         <p>{product.description}</p>
-        <button>Comprar agora</button>
+        <Button paymentId={product.defaultPriceId}/>
       </div>
     </div>
   );

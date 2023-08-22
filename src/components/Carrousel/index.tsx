@@ -28,6 +28,7 @@ export function Carrousel({ products }: ProductsProps) {
           href={`/product/${product.id}`}
           key={product.id}
           className="product keen-slider__slide"
+          prefetch={false}
         >
           <div key={product.id}>
             <Image
