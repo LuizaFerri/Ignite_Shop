@@ -1,14 +1,31 @@
 "use client";
 
+import axios from "axios";
 import "./styles.css";
 
 interface ButtonProps {
-  paymentId: string;
+  priceId: string;
 }
 
-export default function Button(paymentId: ButtonProps) {
-  function handleBuy() {
-    console.log(paymentId);
+export default function Button(priceId: ButtonProps) {
+  async function handleBuyProduct() {
+    try {
+      const response = await axios.post(
+        "/api/checkout",
+        {
+          priceId: priceId.priceId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const { checkoutSession } = response.data;
+      window.location.href = checkoutSession;
+    } catch (error) {
+      console.error(error);
+    }
   }
-  return <button onClick={handleBuy}>Comprar agora</button>;
+  return <button onClick={handleBuyProduct}>Comprar agora</button>;
 }

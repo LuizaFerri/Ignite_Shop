@@ -44,7 +44,7 @@ export default async function Product({ params }: ProductProps) {
         <h1>{product.name}</h1>
         <span>{product.price}</span>
         <p>{product.description}</p>
-        <Button paymentId={product.defaultPriceId}/>
+        <Button priceId={product.defaultPriceId}/>
       </div>
     </div>
   );

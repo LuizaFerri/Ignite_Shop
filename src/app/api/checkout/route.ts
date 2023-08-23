@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { stripe } from "../../../lib/stripe";
 
-export async function POST() {
-  const priceId = "price_1NbujNKdkp8kDckKaWsSdZBi";
+export async function POST(req: NextRequest) {
+  let data = await req.json();
+  const priceId = data.priceId;
   const successUrl = `${process.env.NEXT_URL}/success`;
   const cancelUrl = `${process.env.NEXT_URL}/`;
 
